@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const tg = window.Telegram.WebApp;
 
-    let clickCount = localStorage.getItem("clickCount") ? parseInt(localStorage.getItem("clickCount")) : 0;
+    let clickCount = 0;
     let clickValue = 1;
 
     clickCountDisplay.textContent = clickCount;
@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         clickCount += clickValue;
         clickCountDisplay.textContent = clickCount;
-        localStorage.setItem("clickCount", clickCount);
     });
 
     shopButton.addEventListener("click", function() {
@@ -71,22 +70,23 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    if (tg) {
-        tg.expand();
-        tg.MainButton.setText("Завершить сеанс");
-        tg.MainButton.show();
+    tg.expand();
 
-        tg.MainButton.onClick(() => {
-            console.log("Отправка данных в Telegram:", clickCount);
-            
-            try {
-                tg.sendData(JSON.stringify({ clicks: clickCount }));
-                console.log("✅ Данные отправлены!");
-            } catch (error) {
-                console.error("🚨 Ошибка отправки данных:", error);
-            }
+    tg.MainButton.setText("Отправить данные");
+    tg.MainButton.show();
 
-            tg.close();
-        });
-    }
+    tg.MainButton.onClick(() => {
+        const clickCount = document.getElementById("click-count").textContent;
+        
+        console.log("Отправка данных:", clickCount);
+
+        try {
+            tg.sendData(JSON.stringify({ clicks: clickCount }));
+            console.log("✅ Данные отправлены!");
+        } catch (error) {
+            console.error("❌ Ошибка отправки данных:", error);
+        }
+
+        tg.close();
+    });
 });
