@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; frame-ancestors 'self' https://web.telegram.org https://*.telegram.org;">
+    
     <title>Кликер Эллиот</title>
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="script.js"></script>
     <script>
         const tg = window.Telegram.WebApp;
         
@@ -202,8 +205,6 @@
     </style>
 </head>
 <body>
-    <div id="log-container" style="background: black; color: lime; font-family: monospace; padding: 10px;"></div>
-    
     <div id="clicker-container">
         <div id="click-count">0</div>
         <button id="clicker-button" class="button">Кликни меня!</button>
@@ -227,8 +228,5 @@
     </div>
 
     <button id="end-session-button" class="buttonEnd">Завершить сеанс</button>
-
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
