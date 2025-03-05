@@ -69,24 +69,4 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     });
-
-    tg.expand();
-
-    tg.MainButton.setText("Отправить данные");
-    tg.MainButton.show();
-
-    tg.MainButton.onClick(() => {
-        const clickCount = document.getElementById("click-count").textContent;
-        
-        console.log("Отправка данных:", clickCount);
-
-        try {
-            tg.sendData(JSON.stringify({ clicks: clickCount }));
-            console.log("✅ Данные отправлены!");
-        } catch (error) {
-            console.error("❌ Ошибка отправки данных:", error);
-        }
-
-        tg.close();
-    });
 });
