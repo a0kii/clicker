@@ -17,6 +17,29 @@
         }
     </style>
     <script>
+        (function () {
+            const logContainer = document.getElementById("log-container");
+        
+            function printLog(type, message) {
+                const logEntry = document.createElement("div");
+                logEntry.textContent = `[${type.toUpperCase()}] ${message}`;
+                logContainer.appendChild(logEntry);
+            }
+        
+            const originalLog = console.log;
+            console.log = function (...args) {
+                originalLog.apply(console, args);
+                printLog("log", args.map(String).join(" "));
+            };
+        
+            const originalError = console.error;
+            console.error = function (...args) {
+                originalError.apply(console, args);
+                printLog("error", args.map(String).join(" "));
+            };
+        })();
+
+        
         setTimeout(() => {
             if (!("ontouchstart" in window) || screen.width > 1024) {
                 window.location.href = 'noPC.html';
@@ -27,6 +50,8 @@
     </script>
 </head>
 <body>
+    <div id="log-container" style="background: black; color: lime; font-family: monospace; padding: 10px;"></div>
+    
     <div class="loading-gif">
         <img src="./loading.gif" alt="GIF Loading" draggable="false">
     </div>
