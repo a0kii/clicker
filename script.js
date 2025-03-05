@@ -85,11 +85,19 @@ document.addEventListener("DOMContentLoaded", function() {
     // tg.MainButton.show();
 });
 
-document.getElementById("end-session-button").addEventListener("click", function() {
-    const clickCount = document.getElementById("click-count").textContent;
+if (window.Telegram?.WebApp) {
+    const tg = window.Telegram.WebApp;
     
-    if(window.Telegram.WebApp) {
-        window.Telegram.WebApp.sendData(JSON.stringify({ clicks: clickCount }));
-        window.Telegram.WebApp.close();
-    }
-});
+    tg.expand();
+
+    tg.MainButton.setText("Завершить сеанс");
+    tg.MainButton.show();
+
+    tg.MainButton.onClick(() => {
+        const clickCount = document.getElementById("click-count").textContent;
+        console.log("Отправка данных в Telegram:", clickCount);
+
+        tg.sendData(JSON.stringify({ clicks: clickCount }));
+        tg.close();
+    });
+}
