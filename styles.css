@@ -1,0 +1,100 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    touch-action: manipulation;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#shop-button {
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#shop-button:hover {
+    background-color: #21a1f1;
+}
+
+#shop-container {
+    display: none;
+    text-align: center;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.shop-item {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #888;
+    border-radius: 5px;
+    background-color: #555;
+}
+
+.shop-item button {
+    padding: 5px 10px;
+    background-color: #61dafb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.shop-item button:hover {
+    background-color: #21a1f1;
+}
+
+.plus-one {
+    position: absolute;
+    color: green;
+    font-size: 24px;
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-30px); }
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+#counter {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+#clicker-button {
+    background-color: #333;
+    touch-action: manipulation;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#clicker-button:hover {
+    background-color: #555;
+}
+
+#clicker-button:active {
+    transform: scale(0.95);
+}

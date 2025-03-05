@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка...</title>
+    <style>
+        .loading-gif {
+            padding-top: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .text-under {
+            text-align: center;
+        }
+    </style>
+    <script>
+        setTimeout(() => {
+            if(!/Mobi|Android/i.test(navigator.userAgent)   ){
+                window.location.href = 'main.html'
+            } else {
+                window.location.href = 'noPC.html'
+            }
+        }, 1000);
+    </script>
+</head>
+<body>
+    <div class="loading-gif">
+        <img src="./loading.gif" alt="GIF Loading" draggable="false">
+    </div>
+
+    <div class="text-under">
+        <p>Пожалуйста, подождите...</p>
+    </div>
+</body>
+</html>
