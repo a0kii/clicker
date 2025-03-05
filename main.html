@@ -4,6 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Кликер Эллиот</title>
+    <script>
+        (function () {
+            const logContainer = document.getElementById("log-container");
+        
+            function printLog(type, message) {
+                const logEntry = document.createElement("div");
+                logEntry.textContent = `[${type.toUpperCase()}] ${message}`;
+                logContainer.appendChild(logEntry);
+            }
+        
+            // Перехватываем console.log()
+            const originalLog = console.log;
+            console.log = function (...args) {
+                originalLog.apply(console, args);
+                printLog("log", args.map(String).join(" "));
+            };
+        
+            // Перехватываем console.error()
+            const originalError = console.error;
+            console.error = function (...args) {
+                originalError.apply(console, args);
+                printLog("error", args.map(String).join(" "));
+            };
+        })();
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -178,6 +203,8 @@
     </style>
 </head>
 <body>
+    <div id="log-container" style="background: black; color: lime; font-family: monospace; padding: 10px;"></div>
+    
     <div id="clicker-container">
         <div id="click-count">0</div>
         <button id="clicker-button" class="button">Кликни меня!</button>
