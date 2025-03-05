@@ -5,32 +5,27 @@ document.addEventListener("DOMContentLoaded", function() {
     const shopContainer = document.getElementById("shop-container");
     const shopOverlay = document.getElementById("shop-overlay");
 
-    const tg = window.Telegram.WebApp
+    const tg = window.Telegram.WebApp;
 
     let clickCount = localStorage.getItem("clickCount") ? parseInt(localStorage.getItem("clickCount")) : 0;
     let clickValue = 1;
 
-    clickCountDisplay.textContent = clickCount
+    clickCountDisplay.textContent = clickCount;
 
     clickButton.addEventListener("click", function() {
         const plusOne = document.createElement("div");
-
         plusOne.textContent = `+${clickValue}`;
         plusOne.classList.add("plus-one");
         document.body.appendChild(plusOne);
 
         const buttonRect = clickButton.getBoundingClientRect();
-
         plusOne.style.left = `${buttonRect.left + buttonRect.width / 2 - plusOne.offsetWidth / 2}px`;
         plusOne.style.top = `${buttonRect.top - 24}px`;
 
-        setTimeout(() => {
-            plusOne.remove();
-        }, 500);
+        setTimeout(() => plusOne.remove(), 500);
 
         clickCount += clickValue;
         clickCountDisplay.textContent = clickCount;
-
         localStorage.setItem("clickCount", clickCount);
     });
 
@@ -69,35 +64,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 clickCountDisplay.textContent = clickCount;
                 shopItem.querySelector('div').textContent += ' (Куплено!)';
                 this.disabled = true;
-                this.style.backgroundColor = 'red'
+                this.style.backgroundColor = 'red';
             } else {
                 alert('Недостаточно кликов для покупки этого улучшения.');
             }
         });
     });
 
-    // tg.onEvent('mainButtonClicked', function() {
-    //     tg.sendData(JSON.stringify({ clickCount: clickCount }));
-    //     tg.close();
-    // });
+    if (tg) {
+        tg.expand();
+        tg.MainButton.setText("Завершить сеанс");
+        tg.MainButton.show();
 
-    // tg.MainButton.setText("Сохранить результат");
-    // tg.MainButton.show();
+        tg.MainButton.onClick(() => {
+            console.log("Отправка данных в Telegram:", clickCount);
+            
+            try {
+                tg.sendData(JSON.stringify({ clicks: clickCount }));
+                console.log("✅ Данные отправлены!");
+            } catch (error) {
+                console.error("🚨 Ошибка отправки данных:", error);
+            }
+
+            tg.close();
+        });
+    }
 });
-
-if (window.Telegram?.WebApp) {
-    const tg = window.Telegram.WebApp;
-    
-    tg.expand();
-
-    tg.MainButton.setText("Завершить сеанс");
-    tg.MainButton.show();
-
-    tg.MainButton.onClick(() => {
-        const clickCount = document.getElementById("click-count").textContent;
-        console.log("Отправка данных в Telegram:", clickCount);
-
-        tg.sendData(JSON.stringify({ clicks: clickCount }));
-        tg.close();
-    });
-}
