@@ -12,7 +12,9 @@
         const tg = window.Telegram.WebApp;
 
         if(!tg) window.location.href = "notgwebapp.html";
-        
+
+        if(tg.platform.toLowerCase() === "android" && userAgent.includes("x86")) window.location.href = "notgwebapp.html";
+
         tg.expand();
 
         tg.MainButton.setText("Отправить данные");
