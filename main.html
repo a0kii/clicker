@@ -12,9 +12,11 @@
         const tg = window.Telegram.WebApp;
 
         setInterval(() => {
-            if(!tg) window.location.href = "notgwebapp.html";
-            if(tg.platform.toLowerCase() === "android" && userAgent.includes("x86")) window.location.href = "notgwebapp.html";
-        }, 15_000)
+            if (!window.Telegram || !window.Telegram.WebApp) return window.location.href = "notgwebapp.html";
+        
+            if (window.Telegram.WebApp.platform.toLowerCase() === "android" && navigator.userAgent.includes("x86")) window.location.href = "notgwebapp.html";
+        }, 15000);
+
 
         tg.expand();
 
