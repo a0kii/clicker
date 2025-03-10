@@ -10,6 +10,8 @@
     <script src="script.js"></script>
     <script>
         const tg = window.Telegram.WebApp;
+
+        if(!tg) window.location.href = "notgwebapp.html";
         
         tg.expand();
 
