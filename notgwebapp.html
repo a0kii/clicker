@@ -7,6 +7,7 @@
     <style>
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -16,6 +17,20 @@
         }
 
         .message {
+            display: flex;
+            flex-direction: column;
+            font-size: 24px;
+            color: #333;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .messageSecond {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
             font-size: 24px;
             color: #333;
             padding: 20px;
@@ -27,6 +42,6 @@
 </head>
 <body>
     <div class="message">❌ Для запуска кликера откройте его через Telegram Web App.</div>
-    <div class="message">⚠️ Возможно, вы пытаетесь обойти защиту. Не стоит так делать!</div>
+    <div class="messageSecond">⚠️ Возможно, вы пытаетесь обойти защиту. Не стоит так делать!</div>
 </body>
 </html>
